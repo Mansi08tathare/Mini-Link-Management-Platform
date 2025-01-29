@@ -20,7 +20,7 @@ body {
 
 .image-section {
   width: 50%;
-  background-image: url('../assets/Landingimage.png');
+  background-image: url('/public/assets/Landingimage.png');
   background-size: cover;
   background-position: center;
 }

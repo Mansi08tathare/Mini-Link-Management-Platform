@@ -1,0 +1,183 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    height: 80vh;
+    width: 100%;
+    /* margin: 20px auto; */
+    background: #fff;
+    /* padding: 20px; */
+    /* border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+/* Heading */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-top: 10px;
+}
+
+table thead {
+    background: #eef1f7;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Short URL */
+.short-url {
+    display: flex;
+    align-items: center;
+}
+
+.short-url a {
+    text-decoration: none;
+    color: #007bff;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.short-url button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* Status Colors */
+.active {
+    color: green;
+    font-weight: bold;
+}
+
+.inactive {
+    color: orange;
+    font-weight: bold;
+}
+
+/* Action Buttons */
+.edit-btn,
+.delete-btn {
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 8px;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Pagination */
+.pagination {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    margin: 0 3px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pagination button.active {
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pagination button:disabled {
+    background: #eee;
+    cursor: not-allowed;
+}
+
+/* Modal Styling */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.modal p {
+    margin-bottom: 10px;
+}
+
+.modal button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal button:first-child {
+    background: #dc3545;
+    color: #fff;
+}
+
+.modal button:last-child {
+    background: #28a745;
+    color: #fff;
+}
+.logout-button {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background: #f8f8f8;
+  }
+  

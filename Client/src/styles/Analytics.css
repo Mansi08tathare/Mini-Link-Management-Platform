@@ -1,0 +1,136 @@
+/* Analytics Container */
+.analytics-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* Ensure content aligns to the top */
+  height: 70vh;
+  overflow: hidden;
+  width: 100%;  /* Take up full width of the parent */
+  padding: 0 2vw;  /* Add padding for left and right space */
+}
+
+/* Table Styling */
+.analytics-table {
+  width: 100%;  /* Ensure the table takes up the full width */
+  border-collapse: collapse;
+  margin-bottom: 60px; /* Space for pagination */
+}
+
+  
+  .analytics-table th,
+  .analytics-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .analytics-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+  }
+  
+  .analytics-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Fixed Height for Table Body */
+  .fixed-height-body {
+    display: block;
+    max-height: calc(100vh - 200px); /* Adjust based on your layout */
+    overflow-y:hidden;
+  }
+  
+
+  /* .pagination-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+ 
+  .pagination-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .pagination-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+ 
+  .pagination-text {
+    font-size: 14px;
+    color: #333;
+  } */
+/* Pagination Container */
+.pagination-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Pagination Buttons */
+.pagination-btn {
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination-btn.active {
+  border-color: #6200ea;
+  color: #6200ea;
+  font-weight: bold;
+}
+
+/* Prev & Next Button Styles */
+.pagination-btn.prev,
+.pagination-btn.next {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+.pagination-btn.prev:disabled,
+.pagination-btn.next:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+/* Pagination Ellipsis */
+.pagination-ellipsis {
+  padding: 6px 12px;
+  color: #888;
+  font-weight: bold;
+}

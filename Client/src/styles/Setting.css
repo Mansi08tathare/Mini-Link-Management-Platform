@@ -1,0 +1,56 @@
+.settings-container {
+    width: 80%; /* Set to 80% of the parent container */
+    max-width: 500px; /* Optional: set a maximum width for larger screens */
+    margin: 50px auto;
+    padding: 20px;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    text-align: left; /* Align text to the left */
+  }
+  
+  
+  label {
+    display: inline-block; /* Labels will sit next to input */
+    width: 100px; /* Set a fixed width for labels */
+    font-weight: bold;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Space between input groups */
+  }
+  
+  .input-field {
+    width: 100%;
+    padding: 8px;
+    margin-left: 10px; /* Space between label and input */
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .save-button, .delete-button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    margin-top: 20px; /* Space between button and input fields */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .delete-button {
+    background-color: red;
+  }
+  
+  .save-button:hover {
+    background-color: darkblue;
+  }
+  
+  .delete-button:hover {
+    background-color: darkred;
+  }
+  
