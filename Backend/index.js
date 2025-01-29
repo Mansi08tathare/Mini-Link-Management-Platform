@@ -15,7 +15,7 @@ const cors = require('cors')
 app.use(device.capture());
 
 
-const PORT = process.env.PORT || 3005
+const PORT = process.env.PORT || 3000
 app.use(cors())
 app.use(express.static(path.join(__dirname, "public")))
 // add route
