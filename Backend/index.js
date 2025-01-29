@@ -81,7 +81,7 @@ app.get('/:shortUrl', async (req, res) => {
 
 app.listen(PORT,()=>{
     console.log("Server running on 3005")
-    mongoose.connect(process.env.MONGODB_URI,{
+    mongoose.connect("mongodb+srv://Mansi:7Gm5GyDjig9Hj5HF@cluster0.8newd.mongodb.net/linkMangement?retryWrites=true&w=majority&appName=Cluster0",{
         useNewUrlParser :true ,
         useUnifiedTopology:true
     }).then(()=>{

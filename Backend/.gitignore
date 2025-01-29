@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Logs & Debugging
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS & Dependency files
+.DS_Store
+Thumbs.db
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# TypeScript Compilation
+*.tsbuildinfo
+*.tscache
+*.swp
+*.sw?
+*.bak
+.cache/
+
+# Render-specific
+render.yaml
+render.log
+
+# PM2 logs (if using PM2 for process management)
+pm2.log
+pm2.pid
