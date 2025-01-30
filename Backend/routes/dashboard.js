@@ -51,8 +51,8 @@ router.get('/clicks-by-device', authMiddleware, async (req, res) => {
         };
 
         result.forEach(entry => {
-            if (entry._id === "mobile") deviceClicks.mobile = entry.totalClicks;
-            else if (entry._id === "desktop") deviceClicks.desktop = entry.totalClicks;
+            if (entry._id === "mobile" || entry._id === "phone") deviceClicks.mobile = entry.totalClicks;
+            else if (entry._id === "desktop" || entry._id === "bot") deviceClicks.desktop = entry.totalClicks;
             else if (entry._id === "tablet") deviceClicks.tablet = entry.totalClicks;
         });
 
