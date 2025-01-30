@@ -6,7 +6,7 @@ function Sidebar() {
   
   return (
     <div className='sidebar'>
-      <div className='logo'>
+      <div className='sidebarLogo'>
         <img src="/assets/logo.png" alt="logo" />
       </div>
       <nav>
