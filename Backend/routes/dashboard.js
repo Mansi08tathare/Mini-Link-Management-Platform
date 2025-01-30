@@ -3,13 +3,15 @@ const router = express.Router();
 const Link = require("../schema/link.schema");
 const dotenv = require("dotenv");
 const authMiddleware = require("../middleware/auth.js");
+const mongoose = require("mongoose");
 dotenv.config();
 router.get('/total-clicks', authMiddleware, async (req, res) => {
-    const userId = req.user.id; // Get logged-in user's ID
+    const userId = req.user.id; 
+     const userObjectId = new mongoose.Types.ObjectId(userId);
 
     try {
         const result = await Link.aggregate([
-            { $match: { userId: userId } }, // Filter by user ID
+            { $match: { userId: userObjectId } }, // Filter by user ID
             {
                 $group: {
                     _id: null,
@@ -28,11 +30,11 @@ router.get('/total-clicks', authMiddleware, async (req, res) => {
 });
 
 router.get('/clicks-by-device', authMiddleware, async (req, res) => {
-    const userId = req.user.id;
-
     try {
+         const userId = req.user.id; 
+        const userObjectId = new mongoose.Types.ObjectId(userId);
         const result = await Link.aggregate([
-            { $match: { userId: userId } }, // Only get user's links
+            { $match: { userId: userObjectId } }, // Only get user's links
             { $unwind: "$clicks" }, // Flatten clicks array
             {
                 $group: {
@@ -63,15 +65,15 @@ router.get('/clicks-by-device', authMiddleware, async (req, res) => {
 
 
 router.get('/dayWiseClick', authMiddleware, async (req, res) => {
-    const userId = req.user.id;
-
     try {
+        const userId = req.user.id;
+        const userObjectId = new mongoose.Types.ObjectId(userId);
         const today = new Date();
         const startDate = new Date();
         startDate.setDate(today.getDate() - 3);
 
         const result = await Link.aggregate([
-            { $match: { userId: userId } }, // Only user's links
+            { $match: { userId: userObjectId } }, // Only user's links
             { $unwind: "$clicks" },
             {
                 $match: {
