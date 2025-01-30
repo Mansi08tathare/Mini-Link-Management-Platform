@@ -20,15 +20,7 @@ app.use(cors())
 app.use(express.static(path.join(__dirname, "public")))
 // add route
 //why html is store in folder 
-app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,"public", "try.html")); 
-    // res.send("Hello World")
-    // res.json({
-    //    message:"Hello World"
-    // })
-    //   res.sendFile("<h1> Hello World </h1>")
 
-})
 
   
 app.use(express.urlencoded({extended:true}))
