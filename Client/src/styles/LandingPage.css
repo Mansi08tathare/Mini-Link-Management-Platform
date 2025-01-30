@@ -19,6 +19,7 @@ body {
 }
 
 .image-section {
+  position: relative;
   width: 50%;
   background-image: url('/public/assets/Landingimage.png');
   background-size: cover;
@@ -35,21 +36,18 @@ body {
 }
 
 .header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  margin-bottom: 4rem;
+  position: relative;
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1a1a1a;
-  text-decoration: none;
+   position: absolute;
+  top:5%;
+  left:5%; 
 }
 
 .header-buttons {
-  display: flex;
+  position: absolute;
+  right:0;
   gap: 1rem;
 }
 
@@ -83,6 +81,7 @@ body {
 }
 
 .form-container {
+margin-top: 5rem;
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
