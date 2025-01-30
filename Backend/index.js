@@ -30,6 +30,11 @@ app.use('/link',linkRoute);
 app.use("/analytics",analyticsRoute);
 app.use("/dashboard",dashboardRoute);
 
+app.get("/", (req, res) => {
+    res.send("Welcome to Link Management API!");
+});
+
+
 app.get('/:shortUrl', async (req, res) => {
     const { shortUrl } = req.params;
 
@@ -73,7 +78,7 @@ app.get('/:shortUrl', async (req, res) => {
 
 app.listen(PORT,()=>{
     console.log("Server running on 3005")
-    mongoose.connect("mongodb+srv://Mansi:7Gm5GyDjig9Hj5HF@cluster0.8newd.mongodb.net/linkMangement?retryWrites=true&w=majority&appName=Cluster0",{
+    mongoose.connect(process.env.MONGODB_URI,{
         useNewUrlParser :true ,
         useUnifiedTopology:true
     }).then(()=>{
