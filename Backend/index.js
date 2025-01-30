@@ -77,7 +77,7 @@ app.get('/:shortUrl', async (req, res) => {
 
 
 app.listen(PORT,()=>{
-    console.log("Server running on 3005")
+    console.log("Server running on 3000")
     mongoose.connect(process.env.MONGODB_URI,{
         useNewUrlParser :true ,
         useUnifiedTopology:true
