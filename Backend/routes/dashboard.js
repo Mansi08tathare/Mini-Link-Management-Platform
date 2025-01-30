@@ -31,11 +31,12 @@ router.get('/total-clicks', authMiddleware, async (req, res) => {
 
 router.get('/clicks-by-device', authMiddleware, async (req, res) => {
     try {
-         const userId = req.user.id; 
+        const userId = req.user.id;
         const userObjectId = new mongoose.Types.ObjectId(userId);
+
         const result = await Link.aggregate([
-            { $match: { userId: userObjectId } }, // Only get user's links
-            { $unwind: "$clicks" }, // Flatten clicks array
+            { $match: { userId: userObjectId } }, // Filter links for the user
+            { $unwind: "$clicks" }, // Flatten the clicks array
             {
                 $group: {
                     _id: "$clicks.device",
@@ -44,16 +45,31 @@ router.get('/clicks-by-device', authMiddleware, async (req, res) => {
             }
         ]);
 
+        // Define a mapping function for categorizing devices
+        const categorizeDevice = (device) => {
+            const mobileDevices = ["mobile", "phone", "android", "iphone"];
+            const desktopDevices = ["desktop", "bot", "mac", "windows"];
+            const tabletDevices = ["tablet", "ipad"];
+
+            if (mobileDevices.includes(device.toLowerCase())) return "mobile";
+            if (desktopDevices.includes(device.toLowerCase())) return "desktop";
+            if (tabletDevices.includes(device.toLowerCase())) return "tablet";
+            return "other";
+        };
+
+        // Initialize device click counters
         const deviceClicks = {
             mobile: 0,
             desktop: 0,
             tablet: 0
         };
 
+        // Process result and categorize devices
         result.forEach(entry => {
-            if (entry._id === "mobile" || entry._id === "phone") deviceClicks.mobile = entry.totalClicks;
-            else if (entry._id === "desktop" || entry._id === "bot") deviceClicks.desktop = entry.totalClicks;
-            else if (entry._id === "tablet") deviceClicks.tablet = entry.totalClicks;
+            const category = categorizeDevice(entry._id);
+            if (category in deviceClicks) {
+                deviceClicks[category] += entry.totalClicks;
+            }
         });
 
         res.json(deviceClicks);
