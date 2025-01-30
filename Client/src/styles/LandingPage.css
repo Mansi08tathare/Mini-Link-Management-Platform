@@ -48,7 +48,6 @@ body {
 .header-buttons {
   position: absolute;
   right:0;
-  gap: 1rem;
 }
 
 .header-button {
@@ -81,10 +80,10 @@ body {
 }
 
 .form-container {
-margin-top: 5rem;
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
+margin-top: 5rem;
 }
 
 .form-title {
