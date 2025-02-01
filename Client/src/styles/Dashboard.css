@@ -58,7 +58,7 @@ h3 {
   height: 12px;
   background-color: blue;
   margin: 0 10px;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   min-width: 10px;
 }
 

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -33,9 +34,9 @@ const Link = () => {
   }, [currentPage]);
 
   const formatDate = (timestamp) => {
-    if (!timestamp) return ''; // Handle null or undefined timestamp
+    if (!timestamp) return '';
     const date = new Date(timestamp);
-    if (isNaN(date)) return ''; // Handle invalid date format
+    if (isNaN(date)) return '';
 
     const options = { month: 'short', day: 'numeric', year: 'numeric' };
     const dateString = date.toLocaleDateString('en-IN', options);
@@ -46,16 +47,19 @@ const Link = () => {
       timeZone: 'Asia/Kolkata',
     });
 
-    // Manually format the date string to match "Feb 1, 2025"
     const [day, month, year] = dateString.split(' ');
     return `${month} ${day.replace(',', '')}, ${year} ${timeString}`;
+  };
+
+  const truncateText = (text, maxLength = 30) => {
+    return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text;
   };
 
   const totalPages = Math.ceil(total / limit);
 
   const handleCopy = (shortUrl) => {
     navigator.clipboard.writeText(`${backendUrl}/${shortUrl}`);
-    toast.success("Short URL copied!", { position: "bottom-left" });
+    toast.success("Link Copied", { position: "bottom-left" });
   };
 
   const handleEdit = (link) => {
@@ -63,7 +67,7 @@ const Link = () => {
     setEditData({
       originalUrl: link.originalUrl,
       remarks: link.remarks,
-      expirationDate: link.expirationDate.split("T")[0],
+      expirationDate: link.expirationDate ? link.expirationDate.split("T")[0] : "",
     });
     setShowEditModal(true);
   };
@@ -102,7 +106,6 @@ const Link = () => {
 
   return (
     <div className="container">
-      {/* Logout Button */}
       <button className="logout-button" onClick={handleLogout}>
         Logout
       </button>
@@ -122,12 +125,10 @@ const Link = () => {
         <tbody>
           {links.map((link) => (
             <tr key={link._id}>
-              <td>
-            {formatDate(link.expirationDate)}
-              </td>
-              <td>{link.originalUrl}</td>
-              <td className="short-url">
-                {`${backendUrl}/${link.shortUrl}`}
+              <td>{formatDate(link.expirationDate)}</td>
+              <td title={link.originalUrl}>{truncateText(link.originalUrl)}</td>
+              <td className="short-url" title={`${backendUrl}/${link.shortUrl}`}>
+                {truncateText(`${backendUrl}/${link.shortUrl}`)}
                 <img
                   src="/assets/copyIcon.png"
                   alt="Copy"
@@ -136,12 +137,8 @@ const Link = () => {
               </td>
               <td>{link.remarks}</td>
               <td>{link.clickCount}</td>
-              <td
-                className={
-                  new Date(link.expirationDate) < new Date() ? "inactive" : "active"
-                }
-              >
-                {new Date(link.expirationDate) < new Date() ? "Inactive" : "Active"}
+              <td className={link.expirationDate && new Date(link.expirationDate) < new Date() ? "inactive" : "active"}>
+                {link.expirationDate && new Date(link.expirationDate) < new Date() ? "Inactive" : "Active"}
               </td>
               <td>
                 <img src="/assets/editIcon.png" alt="Edit" onClick={() => handleEdit(link)} />
@@ -169,37 +166,6 @@ const Link = () => {
           &gt;
         </button>
       </div>
-
-      {showDeleteModal && (
-        <div className="modal">
-          <p>Do you want to delete this link?</p>
-          <button onClick={confirmDelete}>Yes</button>
-          <button onClick={() => setShowDeleteModal(false)}>No</button>
-        </div>
-      )}
-
-      {showEditModal && (
-        <div className="modal">
-          <h3>Edit Link</h3>
-          <input
-            type="text"
-            value={editData.originalUrl}
-            onChange={(e) => setEditData({ ...editData, originalUrl: e.target.value })}
-          />
-          <input
-            type="text"
-            value={editData.remarks}
-            onChange={(e) => setEditData({ ...editData, remarks: e.target.value })}
-          />
-          <input
-            type="date"
-            value={editData.expirationDate}
-            onChange={(e) => setEditData({ ...editData, expirationDate: e.target.value })}
-          />
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={() => setShowEditModal(false)}>Cancel</button>
-        </div>
-      )}
 
       <ToastContainer position="bottom-left" />
     </div>

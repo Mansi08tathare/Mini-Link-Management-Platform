@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Analytics.css";
 import { fetchAnalyticsData } from "../services/api";
+import { parse, format } from 'date-fns';
 
 const Analytics = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,6 @@ const Analytics = () => {
   const limit = 10;
   const backendURL = "https://mini-link-management-platform-8fhy.onrender.com/";
 
- 
   useEffect(() => {
     const getData = async () => {
       const result = await fetchAnalyticsData(page, limit);
@@ -19,7 +19,17 @@ const Analytics = () => {
     getData();
   }, [page]);
 
+  const formatDate = (timestamp) => {
+    const parsedDate = parse(timestamp, 'd/M/yyyy, h:mm:ss a', new Date());
+    if (isNaN(parsedDate)) return 'Invalid Date'; // Handle invalid date format
 
+    return format(parsedDate, 'MMM d, yyyy HH:mm');
+  };
+
+  const truncateText = (text, maxLength = 30) => {
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength)}...`;
+  };
 
   const totalPages = Math.ceil(total / limit);
 
@@ -48,18 +58,18 @@ const Analytics = () => {
               <th>Timestamp</th>
               <th>Original Link</th>
               <th>Short Link</th>
-              <th>IP Address</th>
+              <th>ip address</th>
               <th>User Device</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
               <tr key={index}>
-                <td>
- {row.timestamp}
+                <td>{formatDate(row.timestamp)}</td>
+                <td title={row.originalLink}>{truncateText(row.originalLink)}</td>
+                <td title={`${backendURL}${row.shortLink}`}>
+                  {truncateText(`${backendURL}${row.shortLink}`)}
                 </td>
-                <td>{row.originalLink}</td>
-                <td>{`${backendURL}${row.shortLink}`}</td>
                 <td>{row.ipAddress}</td>
                 <td>{row.userDevice}</td>
               </tr>

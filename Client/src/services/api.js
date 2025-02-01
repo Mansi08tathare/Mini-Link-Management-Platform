@@ -28,12 +28,17 @@ export const login = async (data) => {
       body: JSON.stringify(data),
     });
 
+    const result = await response.json();
+
+    console.log("result", result);
+    console.log("response", response);
     if (!response.ok) {
-      throw new Error("Login failed");
+      
+      throw new Error(result.message || "Login failed");
     }
 
-    const result = await response.json();
-    localStorage.setItem("token", result.token); // Store token after login
+    
+    localStorage.setItem("token", result.token); 
     return result;
   } catch (error) {
     console.error("Error during login:", error);

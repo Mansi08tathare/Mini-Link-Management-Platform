@@ -32,20 +32,18 @@ const Login = () => {
     try {
       const res = await login(formData); 
       // console.log("res",res)
-      if (res.token) {
+      // if (res.token) {
         localStorage.setItem("token", res.token); 
         localStorage.setItem("user", res.user); 
         localStorage.setItem("userId",res.userId)
        
         // setUser(res.user);
-        alert("Login Successful");
+        // alert("Login Successful");
         navigate("/dashboard");
-      } else {
-        setError("Invalid login credentials");
-      }
+    
     } catch (error) {
-      console.error("Error during login:", error);
-      setError("An error occurred during login. Please try again.");
+      // console.error("Error during login:", error);
+      setError(error.message);
     }
   };
 
@@ -97,10 +95,11 @@ const Login = () => {
                 onChange={handleChange}
               />
             </div>
+            {error && <p>{error}</p>}
             <button type="submit" className="submit-button">
               Login
             </button>
-            {error && <p>{error}</p>}
+           
           </form>
           <div className="form-footer">
             Don't have an account?

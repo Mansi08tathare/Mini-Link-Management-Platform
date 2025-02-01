@@ -2,10 +2,10 @@
 .analytics-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;  /* Ensure content aligns to the top */
+  justify-content: flex-start;  
   height: 70vh;
   overflow: hidden;
-  width: 100%;  /* Take up full width of the parent */
+  width: 100%;  
   padding: 0 2vw;  /* Add padding for left and right space */
 }
 
@@ -36,51 +36,10 @@
   /* Fixed Height for Table Body */
   .fixed-height-body {
     display: block;
-    max-height: calc(100vh - 200px); /* Adjust based on your layout */
+    max-height: calc(100vh - 200px);
     overflow-y:hidden;
   }
-  
 
-  /* .pagination-container {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
- 
-  .pagination-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .pagination-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .pagination-btn:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  
- 
-  .pagination-text {
-    font-size: 14px;
-    color: #333;
-  } */
-/* Pagination Container */
 .pagination-container {
   position: fixed;
   bottom: 20px;
