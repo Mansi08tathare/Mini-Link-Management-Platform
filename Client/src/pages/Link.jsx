@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -59,7 +58,7 @@ const Link = () => {
 
   const handleCopy = (shortUrl) => {
     navigator.clipboard.writeText(`${backendUrl}/${shortUrl}`);
-    toast.success("Link Copied", { position: "bottom-left" });
+    toast.success("Short URL copied!", { position: "bottom-left" });
   };
 
   const handleEdit = (link) => {
@@ -166,6 +165,40 @@ const Link = () => {
           &gt;
         </button>
       </div>
+
+      {showEditModal && (
+        <div className="modal">
+          <h3>Edit Link</h3>
+          <input
+            type="text"
+            value={editData.originalUrl}
+            onChange={(e) => setEditData({ ...editData, originalUrl: e.target.value })}
+            placeholder="Original URL"
+          />
+          <input
+            type="text"
+            value={editData.remarks}
+            onChange={(e) => setEditData({ ...editData, remarks: e.target.value })}
+            placeholder="Remarks"
+          />
+          <input
+            type="date"
+            value={editData.expirationDate}
+            onChange={(e) => setEditData({ ...editData, expirationDate: e.target.value })}
+            placeholder="Expiration Date"
+          />
+          <button onClick={handleUpdate}>Update</button>
+          <button onClick={() => setShowEditModal(false)}>Cancel</button>
+        </div>
+      )}
+
+      {showDeleteModal && (
+        <div className="modal">
+          <p>Do you want to delete this link?</p>
+          <button onClick={confirmDelete}>Yes</button>
+          <button onClick={() => setShowDeleteModal(false)}>No</button>
+        </div>
+      )}
 
       <ToastContainer position="bottom-left" />
     </div>
