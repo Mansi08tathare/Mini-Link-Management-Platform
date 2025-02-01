@@ -19,6 +19,39 @@ const Analytics = () => {
     getData();
   }, [page]);
 
+ const formatDate = (timestamp) => {
+    console.log("timestamp", timestamp);
+    const [datePart, timePart] = timestamp.split(', ');
+    const [day, month, year] = datePart.split('/');
+    const [time, modifier] = timePart.split(' ');
+    let [hours, minutes, seconds] = time.split(':');
+
+    // Convert to 24-hour format
+    if (modifier === 'pm' && hours !== '12') {
+      hours = String(parseInt(hours, 10) + 12);
+    }
+    if (modifier === 'am' && hours === '12') {
+      hours = '00';
+    }
+
+    // Create a valid date string for the Date constructor
+    const dateString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours}:${minutes}:${seconds}`;
+    const date = new Date(dateString);
+    if (isNaN(date)) return 'Invalid Date'; // Handle invalid date format
+
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    const dateFormatted = date.toLocaleDateString('en-IN', options);
+    const timeFormatted = date.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Kolkata',
+    });
+     // Manually format the date string to match "Jan 30, 2025"
+     const [dayFormatted, monthFormatted, yearFormatted] = dateFormatted.split(' ');
+     return `${monthFormatted} ${dayFormatted.replace(',', '')}, ${yearFormatted} ${timeFormatted}`;
+   };
+
   const totalPages = Math.ceil(total / limit);
 
   const getPaginationItems = () => {
@@ -54,7 +87,7 @@ const Analytics = () => {
             {data.map((row, index) => (
               <tr key={index}>
                 <td>
-             {row.timestamp}
+ {formatDate(row.timestamp)}
                 </td>
                 <td>{row.originalLink}</td>
                 <td>{`${backendURL}${row.shortLink}`}</td>
