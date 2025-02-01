@@ -32,6 +32,25 @@ const Link = () => {
     fetchLinks();
   }, [currentPage]);
 
+  const formatDate = (timestamp) => {
+    if (!timestamp) return ''; // Handle null or undefined timestamp
+    const date = new Date(timestamp);
+    if (isNaN(date)) return ''; // Handle invalid date format
+
+    const options = { month: 'short', day: 'numeric', year: 'numeric' };
+    const dateString = date.toLocaleDateString('en-IN', options);
+    const timeString = date.toLocaleTimeString('en-IN', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: 'Asia/Kolkata',
+    });
+
+    // Manually format the date string to match "Feb 1, 2025"
+    const [day, month, year] = dateString.split(' ');
+    return `${month} ${day.replace(',', '')}, ${year} ${timeString}`;
+  };
+
   const totalPages = Math.ceil(total / limit);
 
   const handleCopy = (shortUrl) => {
@@ -104,15 +123,7 @@ const Link = () => {
           {links.map((link) => (
             <tr key={link._id}>
               <td>
-                {new Date(link.expirationDate).toLocaleString("en-IN", {
-                  month: "short",
-                  day: "numeric",
-                  year: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                  timeZone: "Asia/Kolkata",
-                })}
+            {formatDate(link.expirationDate)}
               </td>
               <td>{link.originalUrl}</td>
               <td className="short-url">
